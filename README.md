@@ -1,4 +1,4 @@
-# Card Authorization
+# Card Authorization Service
 
 A Spring Boot service that authorizes credit card transactions against an account's available credit.
 
@@ -15,7 +15,7 @@ A Spring Boot service that authorizes credit card transactions against an accoun
 ./gradlew bootRun
 ```
 
-The service starts on port 8080 with one seeded card, `demo-card`, with a $1,000 limit. Set `cardauth.seed-demo-card=false` to start empty. Run the tests with `./gradlew test`.
+The service starts on port 8080 with one seeded card, `demo-card`, with a $1,000 limit. Set `card-authorization.seed-demo-card=false` to start empty. Run the tests with `./gradlew test`.
 
 ## API
 
@@ -78,8 +78,8 @@ AuthorizationRule maxPerTransaction = ctx ->
 
 | Package | Contents |
 |---|---|
-| `cardauth.model` | `Money`, `CardAccount`, requests, results, holds |
-| `cardauth.rules` | Authorization rules and the context they evaluate |
-| `cardauth.repository` | Repository interfaces and in-memory implementations |
-| `cardauth.service` | `AuthorizationService` |
-| `cardauth.api` | REST controllers, DTOs, error handling, Spring wiring |
+| `com.chandramcsr.cardauthorization.model` | `Money`, `CardAccount`, requests, results, holds |
+| `com.chandramcsr.cardauthorization.rules` | Authorization rules and the context they evaluate |
+| `com.chandramcsr.cardauthorization.repository` | Repository interfaces and in-memory implementations |
+| `com.chandramcsr.cardauthorization.service` | `AuthorizationService` |
+| `com.chandramcsr.cardauthorization.api` | REST controllers, DTOs, error handling, Spring wiring |
