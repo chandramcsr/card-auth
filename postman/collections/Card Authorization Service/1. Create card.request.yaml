@@ -1,0 +1,29 @@
+$kind: http-request
+name: '1. Create card'
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/cards'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "cardId": "{{cardId}}",
+      "expiration": "2099-12",
+      "creditLimitCents": 10000,
+      "currency": "USD"
+    }
+scripts:
+  - type: beforeRequest
+    language: text/javascript
+    code: |-
+      pm.collectionVariables.set('cardId', 'card-' + Date.now());
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 201', () => pm.response.to.have.status(201));
+      const body = pm.response.json();
+      pm.test('Card is active', () => pm.expect(body.status).to.eql('ACTIVE'));
+      pm.test('Full credit available', () => pm.expect(body.availableCreditCents).to.eql(10000));

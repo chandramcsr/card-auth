@@ -1,0 +1,12 @@
+$kind: collection
+name: Card Authorization Service
+description: 'Requests for the card authorization API. Run the collection in order: it creates a card, authorizes against it, and reverses the hold.'
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8080'
+  - key: cardId
+    value: demo-card
+  - key: requestId
+    value: ''
+  - key: authorizationId
+    value: ''

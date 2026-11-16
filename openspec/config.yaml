@@ -1,0 +1,26 @@
+schema: spec-driven
+
+context: |
+  Card authorization service: Spring Boot 3.2, Java 21, Gradle. Base package com.chandra.cardauth.
+  Domain packages (model, rules, repository, service) stay framework-free; Spring code lives only in api.
+  Money is long minor units plus an ISO 4217 currency. Never use floating point. Overflow and cross-currency math must fail.
+  A decline is a business result, not an error: POST /api/authorizations returns 200 for both APPROVED and DECLINED.
+  requestId is the idempotency key. A replay returns the stored original result and never places a second hold.
+  New authorization checks implement AuthorizationRule and are added to AuthorizationRules.defaults(). Order matters: the first rule that objects decides the decline reason.
+  Time and ID generation are injected (Clock, Supplier<String>). Do not call now() or UUID directly in domain code.
+  Current limits: state is in memory only, a single service-wide lock, no FX conversion, no API authentication.
+
+rules:
+  proposal:
+    - State whether the change alters any existing DeclineReason, HTTP status code, or the rule evaluation order.
+    - Call out any change to idempotency or hold/release semantics explicitly.
+  specs:
+    - Express amounts in minor units with an explicit currency in scenarios.
+  tasks:
+    - Include a test task for every new or modified scenario (service unit test, plus a MockMvc test for API-visible behavior).
+    - Include updating README.md and the Postman collection when the HTTP API changes.
+
+operations:
+  apply:
+    guidance:
+      - Run ./gradlew test before marking tasks complete.
