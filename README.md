@@ -6,16 +6,16 @@ A Spring Boot service that authorizes credit card transactions against an accoun
 
 - Java 17
 - Spring Boot 3.2 (Web, Validation)
-- Maven
+- Gradle 8 (wrapper included)
 - JUnit 5 and MockMvc
 
 ## Run
 
 ```
-mvn spring-boot:run
+./gradlew bootRun
 ```
 
-The service starts on port 8080 with one seeded card, `demo-card`, with a $1,000 limit. Set `cardauth.seed-demo-card=false` to start empty. Run the tests with `mvn test`.
+The service starts on port 8080 with one seeded card, `demo-card`, with a $1,000 limit. Set `cardauth.seed-demo-card=false` to start empty. Run the tests with `./gradlew test`.
 
 ## API
 
